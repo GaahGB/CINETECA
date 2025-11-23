@@ -1,58 +1,55 @@
 # 🎬 Cineteca Neon Experience - Proposta de Redesign (Front-End)
 
-## 🌟 Visão Geral do Projeto
+![Status](https://img.shields.io/badge/Status-Protótipo_Funcional-success)
+![Design](https://img.shields.io/badge/Design-Glassmorphism-blueviolet)
+![Contexto](https://img.shields.io/badge/Local-Teófilo_Otoni-yellow)
 
-Este repositório contém um protótipo **Front-End** completo e funcional para modernizar a experiência digital do cinema **Cineteca / Tia Teca** na cidade de Teófilo Otoni.
+## ✨ Visão Geral & Motivação
 
-O projeto foi desenvolvido com foco em performance, design imersivo e, principalmente, na **Experiência do Usuário (UX)**, visando solucionar as frustrações recorrentes dos clientes com a plataforma digital atual.
+Este repositório apresenta um protótipo **Front-End** completo, criado para modernizar a plataforma digital do cinema **Cineteca / Tia Teca** na cidade de Teófilo Otoni - MG.
 
-**Status:** Protótipo Front-End 100% Funcional.
+O projeto nasceu como um **mini projeto acadêmico**, mas foi desenvolvido com a paixão de um cliente assíduo que percebeu a necessidade de uma interface que realmente acompanhe a excelência da sala de cinema física.
 
----
-
-## ✨ Recursos e Funcionalidades Implementadas
-
-O design e a lógica foram construídos para refletir um sistema de compra de ingressos moderno e eficiente, como os grandes cinemas nacionais.
-
-### 🎨 Design e Estética
-* **"Neon Experience" Visual:** Tema escuro (Dark Mode) com contrastes em amarelo ouro (neon) e roxo, remetendo à sensação imersiva de uma sala de cinema.
-* **Glassmorphism:** Uso do efeito de "vidro fosco" na tela de login e cartões internos, dando um visual premium e moderno.
-* **Responsividade Total:** Layout adaptável para desktop, tablets e, principalmente, smartphones (Mobile-First).
-
-### 🛒 Fluxo de Compra e Ingressos
-* **Seleção em 3 Passos:** Fluxo de compra claro e objetivo (Sessão > Lanches > Pagamento).
-* **Geração de PDF Offline:** O sistema gera um ingresso com o filme, horário, e um QR Code dinâmico, juntamente com as regras de acesso, pronto para download imediato (usando `html2pdf.js`).
-* **Lanches Opcionais:** Etapa de lanches com opção clara de "Pular" a compra, tornando a jornada do usuário mais rápida.
-
-### ⚠️ Limitações (Foco no Back-End)
-
-**Este projeto é estritamente Front-End.**
-
-Os dados dos filmes, preços e lanches estão armazenados localmente nos arquivos `data/movies.js` e `data/snacks.js` (como um "banco de dados estático").
-
-Para uma implementação comercial definitiva, a empresa Cineteca precisará integrar este Front-End a um **Back-End profissional** (servidor, banco de dados real) que permita:
-
-1.  **Painel de Administração:** Um sistema de login para que a equipe possa adicionar/remover filmes, alterar preços e horários sem mexer no código.
-2.  **Gestão de Vagas:** Controle real de assentos e ingressos vendidos.
-3.  **Processamento de Pagamentos:** Integração real com PIX/Cartão.
-
-A beleza e complexidade da interface já estão prontas; o próximo passo é conectar a "parte bonitinha" à infraestrutura de gestão da empresa.
+> **Objetivo:** Entregar um design e experiência de usuário de nível premium, focado em resolver os desafios de usabilidade e navegação que o público local enfrenta atualmente.
 
 ---
 
-## 🛠️ Como Iniciar e Hospedar (GitHub Pages)
+## 💡 Proposta de Valor e Destaques
 
-Este projeto não requer servidor nem bibliotecas complexas para rodar.
+O código Front-End é 100% funcional e pronto para ser integrado a qualquer Back-End moderno.
 
-1.  **Clone o Repositório:** `git clone [link do seu repo]`
-2.  **Hospedagem Instantânea:** Basta enviar os arquivos para o GitHub e ativar o **GitHub Pages** na aba "Settings".
-3.  **Pronto:** O site estará no ar em minutos com um link como `[seu-usuario].github.io/cineteca-neon-experience/`.
+### 🎨 Design e Usabilidade (UX)
+* **Imersão "Neon":** Tema escuro (Dark Mode) com contrastes vibrantes em amarelo ouro e roxo, evocando a atmosfera da sala de cinema.
+* **Responsividade Total:** Arquitetura **Mobile-First**, garantindo uma experiência fluida em qualquer smartphone, tablet ou desktop.
+* **Interface Limpa:** Utilização sutil de efeitos *Glassmorphism* (vidro fosco) e fontes modernas (`Montserrat` e `Inter`) para um visual premium.
+
+### 🛒 Fluxo de Compra e Resultado
+* **Jornada Otimizada:** Fluxo de compra claro e intuitivo em apenas 3 passos (Sessão > Lanches > Pagamento).
+* **Ingresso Gerado na Hora:** Utiliza a biblioteca `html2pdf.js` para gerar um ingresso digital robusto, contendo todos os detalhes da compra, QR Code gerado via API e instruções claras, pronto para download.
+* **Gerenciamento de Estado:** Lógica em JavaScript puro para calcular o preço dos ingressos (inteira/meia), lanches e atualizar o total em tempo real sem recarregar a página.
 
 ---
-## 💻 Tecnologias
-* HTML5 (Estrutura)
-* CSS3 (Estilização pura e responsividade)
-* JavaScript ES6 (Lógica e gerenciamento de estado)
-* `html2pdf.js` (Biblioteca para geração do ingresso em PDF)
 
-Desenvolvido por **[Gabriel Silva Matos]** como uma proposta de melhoria e demonstração de paixão pela comunidade cinematográfica de Teófilo Otoni.
+## 🛠 Tecnologias e Dependências
+
+| Tecnologia | Função | Nota |
+| :--- | :--- | :--- |
+| **HTML5** | Estrutura | Semântica moderna e acessível. |
+| **CSS3** | Estilização | Estilos puros, variáveis CSS (:root) e Media Queries. |
+| **JavaScript (ES6)** | Lógica de Negócio | Gerenciamento de estado e fluxo de compra. |
+| **html2pdf.js** | Geração de PDF | Biblioteca externa para download do ingresso. |
+| **Font Awesome** | Ícones | Conjunto de ícones essencial para UI. |
+| **QR Server API** | Integração | API pública para geração dinâmica dos QR Codes. |
+
+---
+
+## 📂 Estrutura do Projeto
+
+```bash
+/
+├── index.html          # Markup principal (SPA simulada)
+├── style.css           # Design System, Animações e Responsividade
+├── script.js           # Lógica do Modal, Slider e PDF
+└── data/               # Simulação de Banco de Dados (JSON objects)
+    ├── movies.js       # Catálogo de filmes
+    └── snacks.js       # Itens da bomboniére
