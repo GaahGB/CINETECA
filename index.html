@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TIA TECA | Cine Experience</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+    <div id="login-overlay">
+        <div class="login-card">
+            <i class="fa-solid fa-film" style="font-size: 3rem; color: var(--primary); margin-bottom: 20px;"></i>
+            <h1 style="font-size: 2rem; margin-bottom: 5px;">CINE TECA</h1>
+            <p style="color: #666; margin-bottom: 30px; letter-spacing: 1px; font-weight: bold;">TIA TECA ACCESS</p>
+            
+            <div id="field-name" class="hidden">
+                <input type="text" id="reg-name" class="inp-field" placeholder="Seu Nome Completo">
+            </div>
+
+            <input type="email" id="login-email" class="inp-field" placeholder="Seu email">
+            <input type="password" id="login-pass" class="inp-field" placeholder="Sua senha">
+            
+            <div id="field-pass-confirm" class="hidden">
+                <input type="password" id="reg-pass-confirm" class="inp-field" placeholder="Confirme a senha">
+            </div>
+
+            <button class="btn btn-primary" id="btn-login-action" style="width: 100%; margin-top: 10px;" onclick="executarAuth()">ENTRAR</button>
+            
+            <p style="margin-top: 20px; font-size: 0.9rem; color: #888; cursor: pointer;" onclick="toggleLoginMode()">
+                <span id="toggle-text">Não tem conta? <span style="color: var(--primary); text-decoration: underline;">Crie agora</span></span>
+            </p>
+        </div>
+    </div>
+
+    <div id="main-app" class="hidden"> 
+        <header>
+            <div class="logo"><i class="fa-solid fa-clapperboard"></i> CINE TECA</div>
+            <nav class="nav-menu">
+                <button class="active" onclick="nav('home', this)">FILMES</button>
+                <button onclick="nav('snacks', this)">LANCHES</button>
+                <button onclick="nav('account', this)">CONTA</button>
+            </nav>
+        </header>
+
+        <div id="view-home" class="view-section container">
+            <div class="hero">
+                <div class="hero-slider-wrapper" id="hero-slider"></div>
+                <div class="slider-controls">
+                    <button onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button onclick="nextSlide()"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <h2 class="section-title">Em Cartaz</h2>
+            <div class="movie-list-carousel" id="movie-list"></div>
+        </div>
+
+        <div id="view-snacks" class="view-section container hidden">
+            <div style="padding-top: 20px;">
+                <h2 style="font-size: 2.5rem; color: white;">Cine<span style="color:var(--primary)">Lanches</span></h2>
+                <p style="color: var(--text-muted);">A experiência completa pede um acompanhamento.</p>
+                <div class="snack-grid-wrapper" id="page-snacks"></div>
+            </div>
+        </div>
+
+        <div id="view-my-tickets" class="view-section container hidden">
+            <div style="padding-top: 20px;">
+                <button class="btn-outline" onclick="nav('account')" style="margin-bottom: 20px; padding: 8px 20px; border-radius: 10px;">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar
+                </button>
+                <h2 style="font-size: 2rem; color: white; margin-bottom: 10px;">Meus <span style="color:var(--primary)">Ingressos</span></h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Baixe seu PDF ou apresente o QR Code.</p>
+                <div id="tickets-container" class="tickets-list"></div>
+            </div>
+        </div>
+
+        <div id="view-account" class="view-section container hidden">
+            <div class="account-header">
+                <div class="avatar-circle">
+                    <i class="fa-solid fa-user-astronaut"></i>
+                </div>
+                <h2 id="user-display">Visitante</h2>
+                <span style="color: var(--primary); font-size: 0.9rem; letter-spacing: 2px;">MEMBRO VIP</span>
+            </div>
+
+            <div class="dash-grid">
+                <div class="dash-card" onclick="showTickets()">
+                    <i class="fa-solid fa-ticket"></i>
+                    <h3>Meus Ingressos</h3>
+                    <p>Ver ingressos ativos</p>
+                </div>
+                <div class="dash-card" onclick="showHistory()">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <h3>Histórico</h3>
+                    <p>Filmes assistidos</p>
+                </div>
+                <div class="dash-card" onclick="shareApp()">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <h3>Compartilhar</h3>
+                    <p>Convide amigos</p>
+                </div>
+                <div class="dash-card logout" onclick="fazerLogout()">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <h3>Sair da Conta</h3>
+                    <p>Encerrar sessão</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-window">
+            <div class="modal-left">
+                <img id="m-poster" src="" class="modal-poster"> 
+            </div>
+            <div class="modal-right">
+                <div class="modal-top-bar">
+                    <div>
+                        <h2 id="m-title" style="font-size: 1.5rem; color: white;">Filme</h2>
+                        <span id="m-meta" style="color: var(--text-muted); font-size: 0.85rem;">Detalhes</span>
+                    </div>
+                    <button onclick="fecharModal()" style="background:none; border:none; color:white; font-size:1.5rem; cursor:pointer; opacity:0.7;">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="step-1" class="step-box">
+                        <h3 style="color: white; margin-bottom: 20px;">1. Selecione Ingressos</h3>
+                        <div class="ticket-selector-area">
+                            <div class="ticket-row">
+                                <div><span class="ticket-label">INTEIRA</span><span class="ticket-price" id="label-price-full">R$ 00,00</span></div>
+                                <div class="qty-control"><button class="btn-qty" onclick="changeTicket('full', -1)">-</button><span id="qty-full">0</span><button class="btn-qty" onclick="changeTicket('full', 1)">+</button></div>
+                            </div>
+                            <div class="ticket-row">
+                                <div><span class="ticket-label">MEIA-ENTRADA</span><span class="ticket-price" id="label-price-half">R$ 00,00</span></div>
+                                <div class="qty-control"><button class="btn-qty" onclick="changeTicket('half', -1)">-</button><span id="qty-half">0</span><button class="btn-qty" onclick="changeTicket('half', 1)">+</button></div>
+                            </div>
+                        </div>
+                        <h3 style="color: white; margin: 25px 0 15px;">2. Data & Horário</h3>
+                        <div id="date-container" style="display:flex; gap:10px; overflow-x:auto; padding-bottom:15px; margin-bottom: 25px;"></div>
+                        <h4 style="color:var(--text-muted); margin-bottom:15px; font-size:0.9rem;">SESSÕES DISPONÍVEIS</h4>
+                        <div id="time-container" style="display:flex; gap:12px; flex-wrap:wrap;"></div>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px dashed #333;">
+                            <strong style="color: var(--primary); display: block; margin-bottom: 8px;">SINOPSE</strong>
+                            <p id="m-synopsis" style="color: #aaa; font-size: 0.9rem; line-height: 1.7;"></p>
+                        </div>
+                    </div>
+
+                    <div id="step-2" class="step-box hidden">
+                        <h3 style="color: white; margin-bottom: 10px;">Adicionar Lanches? <span style="font-size:0.9rem; color:#777; font-weight:400;">(Opcional)</span></h3>
+                        <p style="color:#aaa; font-size:0.9rem; margin-bottom:20px;">Você não é obrigado a comprar lanches para prosseguir.</p>
+                        
+                        <button class="btn-outline" style="width:100%; margin-bottom:25px; border-style:dashed; padding:10px;" onclick="mudarPasso(1)">
+                            Continuar sem lanches <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                        <div id="snack-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;"></div>
+                    </div>
+
+                    <div id="step-3" class="step-box hidden">
+                        <h3 style="color: white; margin-bottom: 20px;">Forma de Pagamento</h3>
+                        <div class="pay-option" onclick="selectPay(this)"><i class="fa-brands fa-pix" style="font-size: 1.8rem;"></i><div><h3 style="font-size: 1.1rem; color: white;">PIX</h3><p style="font-size: 0.8rem; color: #777;">Aprovação imediata.</p></div></div>
+                        <div class="pay-option" onclick="selectPay(this)"><i class="fa-regular fa-credit-card" style="font-size: 1.8rem;"></i><div><h3 style="font-size: 1.1rem; color: white;">Cartão de Crédito</h3><p style="font-size: 0.8rem; color: #777;">Mastercard, Visa, Elo.</p></div></div>
+                        <div class="pay-option" onclick="selectPay(this)"><i class="fa-solid fa-store" style="font-size: 1.8rem;"></i><div><h3 style="font-size: 1.1rem; color: white;">Pagar na Bilheteria</h3><p style="font-size: 0.8rem; color: var(--primary);">Reserva até 15 min antes.</p></div></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div><span style="display:block; font-size:0.75rem; color:#666;">TOTAL A PAGAR</span><span id="m-total" style="color: var(--primary); font-size: 1.8rem; font-weight: 900;">R$ 0,00</span></div>
+                    <div style="display: flex; gap: 15px;"><button class="btn btn-outline" id="btn-back" onclick="mudarPasso(-1)">VOLTAR</button><button class="btn btn-primary" id="btn-next" onclick="mudarPasso(1)">CONTINUAR</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data/movies.js"></script> 
+    <script src="data/snacks.js"></script> 
+    <script src="script.js"></script> 
+</body>
+</html>
